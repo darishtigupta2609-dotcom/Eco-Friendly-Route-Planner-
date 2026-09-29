@@ -1,0 +1,2387 @@
+/* =====================================================
+   EcoRoute - style.css
+   Eco-Friendly Route Planner (Version 1)
+   ===================================================== */
+
+
+/* =====================================================
+   1. CSS VARIABLES (change colors here in one place)
+   ===================================================== */
+:root {
+  --green-900: #14532d;
+  --green-700: #15803d;
+  --green-600: #16a34a;
+  --green-500: #22c55e;
+  --green-100: #dcfce7;
+  --green-50:  #f0fdf4;
+
+  --text-dark:  #1f2937;
+  --text-light: #6b7280;
+  --white:      #ffffff;
+  --border:     #d1d5db;
+  --danger:     #dc2626;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+
+  --radius: 12px;
+  --transition: 0.3s ease;
+}
+
+
+/* =====================================================
+   2. RESET AND BASE STYLES
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* keeps section titles visible below the sticky nav */
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--green-50);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  color: var(--green-900);
+}
+
+
+/* =====================================================
+   3. LAYOUT HELPERS (shared by all sections)
+   ===================================================== */
+main section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Small green line under every section title */
+.section-title::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 0.6rem auto 0;
+  background-color: var(--green-500);
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 0.75rem auto 0;
+}
+
+
+/* =====================================================
+   4. BUTTONS
+   ===================================================== */
+.btn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.btn-primary {
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  background: linear-gradient(135deg, var(--green-500), var(--green-600));
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   5. NAVIGATION BAR
+   ===================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--green-900);
+  box-shadow: var(--shadow-sm);
+}
+
+.navbar {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.navbar-links a {
+  display: block;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.95rem;
+  color: var(--green-100);
+  border-radius: 50px;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.navbar-links a:hover {
+  color: var(--white);
+  background-color: var(--green-700);
+}
+
+
+/* =====================================================
+   6. HERO SECTION
+   ===================================================== */
+/* The hero fills the full width, so we override the shared section width */
+main section.hero {
+  max-width: none;
+  margin: 0;
+  padding: 6rem 1.5rem;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green-900) 0%, var(--green-700) 60%, var(--green-500) 100%);
+}
+
+.hero-content {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  color: var(--white);
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.hero-tagline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--green-100);
+  margin-bottom: 1.25rem;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+
+/* Make the hero button white so it stands out on green */
+.hero .btn-primary {
+  color: var(--green-900);
+  background: var(--white);
+}
+
+.hero .btn-primary:hover {
+  background: var(--green-100);
+}
+
+
+/* =====================================================
+   7. ROUTE PLANNER (form card)
+   ===================================================== */
+.planner-form {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--green-600);
+  box-shadow: var(--shadow-md);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label,
+.transport-fieldset legend {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: var(--green-900);
+}
+
+/* Text inputs */
+.planner-form input[type="text"] {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background-color: var(--green-50);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+}
+
+.planner-form input[type="text"]:hover {
+  border-color: var(--green-500);
+}
+
+.planner-form input[type="text"]:focus {
+  outline: none;
+  background-color: var(--white);
+  border-color: var(--green-600);
+  box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+}
+
+/* Transport mode checkboxes */
+.transport-fieldset {
+  border: none;
+}
+
+.transport-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.transport-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: var(--green-50);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
+}
+
+.transport-option:hover {
+  border-color: var(--green-500);
+  background-color: var(--green-100);
+  transform: translateY(-2px);
+}
+
+.transport-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--green-600);
+  cursor: pointer;
+}
+
+/* Highlight a transport option when its checkbox is ticked */
+.transport-option:has(input:checked) {
+  border-color: var(--green-600);
+  background-color: var(--green-100);
+}
+
+/* Error message (JavaScript will fill this in) */
+.form-error {
+  min-height: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--danger);
+}
+
+.planner-form .btn {
+  width: 100%;
+}
+
+
+/* =====================================================
+   8. RESULTS SECTION
+   ===================================================== */
+.results-placeholder {
+  max-width: 650px;
+  margin: 0 auto 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-light);
+  background-color: var(--white);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* Grid that will hold the result cards created by JavaScript */
+.results-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Result card. Give your JavaScript-created cards the class "result-card" */
+.result-card {
+  padding: 1.5rem;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  border-top: 5px solid var(--green-500);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.result-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.result-card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.result-card p {
+  margin-bottom: 0.3rem;
+  color: var(--text-dark);
+}
+
+/* Add the class "best" to the lowest-emission card */
+.result-card.best {
+  border-top-color: var(--green-700);
+  background-color: var(--green-100);
+}
+
+/* Best option message box */
+.best-option {
+  margin-bottom: 2rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--green-900);
+}
+
+/* Show the box only when JavaScript puts something inside it */
+.best-option:not(:empty) {
+  padding: 1.25rem;
+  background-color: var(--green-100);
+  border-left: 6px solid var(--green-600);
+  border-radius: var(--radius);
+}
+
+
+/* =====================================================
+   9. TRANSPORT COMPARISON TABLE
+   ===================================================== */
+/* The wrapper lets the table scroll sideways on small screens */
+.table-wrapper {
+  overflow-x: auto;
+  margin-bottom: 2.5rem;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.comparison-table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+}
+
+.comparison-table caption {
+  padding: 1rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: left;
+  color: var(--green-900);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+}
+
+.comparison-table thead th {
+  color: var(--white);
+  background-color: var(--green-700);
+}
+
+.comparison-table tbody tr {
+  border-bottom: 1px solid var(--green-100);
+  transition: background-color var(--transition);
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background-color: var(--green-50);
+}
+
+.comparison-table tbody tr:hover {
+  background-color: var(--green-100);
+}
+
+
+/* =====================================================
+   10. CO2 COMPARISON CHART (horizontal bars)
+   ===================================================== */
+.chart-section {
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background-color: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.chart-title {
+  margin-bottom: 1.25rem;
+}
+
+/* Suggested classes for JavaScript to create:
+   <div class="chart-row">
+     <span class="chart-label">Car</span>
+     <div class="chart-track"><div class="chart-bar" style="width: 80%"></div></div>
+     <span class="chart-value">1.2 kg</span>
+   </div>
+*/
+.chart-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.chart-label {
+  flex: 0 0 90px;
+  font-weight: 600;
+}
+
+.chart-track {
+  flex: 1;
+  height: 22px;
+  background-color: var(--green-100);
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-500), var(--green-700));
+  border-radius: 50px;
+  transition: width 0.8s ease;
+}
+
+.chart-value {
+  flex: 0 0 80px;
+  text-align: right;
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* Small note under the results */
+.note {
+  font-size: 0.9rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--text-light);
+}
+
+
+/* =====================================================
+   11. ENVIRONMENTAL IMPACT SECTION
+   ===================================================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.info-card {
+  padding: 1.75rem;
+  background-color: var(--white);
+  border-bottom: 5px solid var(--green-500);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.info-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.info-card h3 {
+  margin-bottom: 0.6rem;
+}
+
+.info-card p {
+  color: var(--text-light);
+}
+
+/* "Estimated CO2 Saved" highlight box */
+.co2-saved {
+  padding: 2rem;
+  text-align: center;
+  color: var(--white);
+  background: linear-gradient(135deg, var(--green-700), var(--green-600));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+
+.co2-saved h3 {
+  margin-bottom: 0.5rem;
+  color: var(--white);
+}
+
+
+/* =====================================================
+   12. ABOUT SECTION
+   ===================================================== */
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.about-block {
+  padding: 1.75rem;
+  background-color: var(--white);
+  border-left: 5px solid var(--green-600);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.about-block:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.about-block h3 {
+  margin-bottom: 0.6rem;
+}
+
+.about-block p {
+  color: var(--text-light);
+}
+
+.about-block ul {
+  padding-left: 1.25rem;
+  color: var(--text-light);
+}
+
+.about-block li {
+  list-style: disc;
+  margin-bottom: 0.4rem;
+}
+
+
+/* =====================================================
+   13. LIMITATIONS AND FUTURE SCOPE
+   ===================================================== */
+.limitations-list,
+.future-list {
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.limitations-list li,
+.future-list li {
+  position: relative;
+  margin-bottom: 0.9rem;
+  padding: 1rem 1rem 1rem 3rem;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.limitations-list li:hover,
+.future-list li:hover {
+  transform: translateX(6px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Little icon in front of each list item */
+.limitations-list li::before,
+.future-list li::before {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-weight: 700;
+}
+
+.limitations-list li::before {
+  content: "!";
+  color: #d97706;
+}
+
+.future-list li::before {
+  content: "\2192"; /* right arrow */
+  color: var(--green-600);
+}
+
+.limitations-list li {
+  border-left: 5px solid #f59e0b;
+}
+
+.future-list li {
+  border-left: 5px solid var(--green-500);
+}
+
+
+/* =====================================================
+   14. FOOTER
+   ===================================================== */
+.site-footer {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--green-100);
+  background-color: var(--green-900);
+}
+
+.footer-content {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  margin-bottom: 0.4rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.footer-text {
+  font-size: 0.95rem;
+}
+
+.footer-back-to-top {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.5rem 1.25rem;
+  color: var(--white);
+  border: 2px solid var(--green-500);
+  border-radius: 50px;
+  transition: background-color var(--transition);
+}
+
+.footer-back-to-top:hover {
+  background-color: var(--green-600);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+
+/* =====================================================
+   15. RESPONSIVE DESIGN
+   ===================================================== */
+
+/* ----- Tablets (768px and below) ----- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .navbar-links {
+    justify-content: center;
+  }
+
+  .hero-title {
+    font-size: 2.75rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.25rem;
+  }
+
+  main section {
+    padding: 3rem 1.25rem;
+  }
+
+  main section.hero {
+    padding: 4rem 1.25rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* ----- Mobile phones (480px and below) ----- */
+@media (max-width: 480px) {
+  .navbar-links a {
+    padding: 0.35rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-title {
+    font-size: 2.25rem;
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .planner-form {
+    padding: 1.25rem;
+  }
+
+  .transport-options {
+    grid-template-columns: 1fr; /* one option per row */
+  }
+
+  .chart-row {
+    flex-wrap: wrap;
+  }
+
+  .chart-label {
+    flex: 1 1 100%;
+  }
+
+  .chart-track {
+    flex: 1 1 60%;
+  }
+}
+/* =====================================================
+   ECOROUTE - ELEGANT VISUAL ENHANCEMENTS
+   Paste at the END of style.css
+   ===================================================== */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Softer overall appearance */
+body {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(76, 175, 80, 0.08), transparent 25%),
+    radial-gradient(circle at 90% 30%, rgba(139, 195, 74, 0.08), transparent 25%),
+    #f4fbf6;
+}
+
+/* Elegant navigation */
+.site-header {
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 15px rgba(20, 80, 45, 0.12);
+}
+
+.navbar-logo {
+  transition: transform 0.25s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.04);
+}
+
+.navbar-links a {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.navbar-links a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 0;
+  height: 2px;
+  background: #2e9d55;
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+
+.navbar-links a:hover::after {
+  width: 70%;
+}
+
+/* Hero section */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before,
+.hero::after {
+  content: "🍃";
+  position: absolute;
+  font-size: 42px;
+  opacity: 0.18;
+  animation: floatLeaf 4s ease-in-out infinite;
+}
+
+.hero::before {
+  left: 8%;
+  top: 25%;
+}
+
+.hero::after {
+  right: 9%;
+  bottom: 20%;
+  animation-delay: 1.5s;
+}
+
+@keyframes floatLeaf {
+  0%, 100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+/* Buttons */
+.btn {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(25, 120, 65, 0.2);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Main form */
+.planner-form {
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.planner-form:hover {
+  box-shadow: 0 14px 35px rgba(35, 100, 60, 0.12);
+}
+
+/* Input interaction */
+.form-group input {
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.form-group input:focus {
+  border-color: #2eae5b;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(46, 174, 91, 0.12);
+  outline: none;
+}
+
+/* Transport cards */
+.transport-option {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.transport-option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 18px rgba(30, 120, 65, 0.12);
+}
+
+/* Section headings */
+.section-title {
+  position: relative;
+}
+
+.section-title::after {
+  content: "🌿";
+  font-size: 18px;
+  margin-left: 8px;
+  opacity: 0.7;
+}
+
+/* Result cards */
+.results-card,
+.result-card,
+.comparison-card {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.results-card:hover,
+.result-card:hover,
+.comparison-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(25, 100, 55, 0.13);
+}
+
+/* Best option */
+#best-option {
+  position: relative;
+  overflow: hidden;
+}
+
+#best-option::after {
+  content: "🌱";
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 30px;
+  opacity: 0.18;
+}
+
+/* Environmental section */
+#environmental-impact {
+  position: relative;
+}
+
+#environmental-impact::before {
+  content: "🌎";
+  display: block;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+/* Tables become more interactive */
+.comparison-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.comparison-table tbody tr:hover {
+  background: rgba(46, 174, 91, 0.07);
+}
+
+/* Lists */
+.limitations-list li,
+.future-list li {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.limitations-list li:hover,
+.future-list li:hover {
+  transform: translateX(5px);
+  background: rgba(46, 174, 91, 0.07);
+}
+
+/* Footer */
+.site-footer {
+  position: relative;
+}
+
+.site-footer::before {
+  content: "🌱  🌿  🍃";
+  display: block;
+  font-size: 20px;
+  letter-spacing: 8px;
+  margin-bottom: 12px;
+  opacity: 0.65;
+}
+
+/* Gentle appearance animation */
+.hero-content,
+.section-header,
+.planner-form {
+  animation: softAppear 0.7s ease both;
+}
+
+@keyframes softAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* =====================================================
+   BEAUTIFUL LIMITATIONS MAP
+   ===================================================== */
+
+.limitations {
+  padding: 90px 8%;
+}
+
+.limitations-layout {
+  max-width: 1100px;
+  margin: 45px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+
+/* Map */
+.eco-map {
+  height: 430px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, #dff5df, #f4f9df);
+  box-shadow: 0 15px 40px rgba(0, 80, 40, 0.12);
+  border: 2px solid #d5ead5;
+}
+
+/* Decorative roads */
+.map-road {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+  box-shadow: 0 0 0 5px rgba(180, 210, 180, 0.25);
+}
+
+.road-one {
+  width: 600px;
+  height: 55px;
+  transform: rotate(25deg);
+  top: 100px;
+  left: -100px;
+}
+
+.road-two {
+  width: 600px;
+  height: 45px;
+  transform: rotate(-25deg);
+  top: 280px;
+  left: -80px;
+}
+
+.road-three {
+  width: 500px;
+  height: 35px;
+  transform: rotate(70deg);
+  top: -40px;
+  left: 250px;
+}
+
+/* Green route */
+.map-route-line {
+  position: absolute;
+  width: 270px;
+  height: 8px;
+  background: #18a957;
+  border-radius: 20px;
+  transform: rotate(-18deg);
+  top: 210px;
+  left: 95px;
+  box-shadow: 0 0 15px rgba(24, 169, 87, 0.35);
+}
+
+/* Pins */
+.map-pin {
+  position: absolute;
+  font-size: 38px;
+  z-index: 5;
+  filter: drop-shadow(0 5px 5px rgba(0,0,0,0.15));
+}
+
+.start-pin {
+  top: 95px;
+  left: 75px;
+}
+
+.end-pin {
+  bottom: 90px;
+  right: 70px;
+}
+
+/* Car */
+.map-car {
+  position: absolute;
+  font-size: 42px;
+  top: 185px;
+  left: 210px;
+  z-index: 6;
+  animation: driveCar 3s ease-in-out infinite alternate;
+}
+
+@keyframes driveCar {
+  from {
+    transform: translateX(-15px);
+  }
+
+  to {
+    transform: translateX(25px);
+  }
+}
+
+/* Labels */
+.map-label {
+  position: absolute;
+  background: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #145c35;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  z-index: 7;
+}
+
+.start-label {
+  top: 150px;
+  left: 35px;
+}
+
+.end-label {
+  bottom: 55px;
+  right: 30px;
+}
+
+/* Trees */
+.map-tree {
+  position: absolute;
+  font-size: 28px;
+  z-index: 3;
+}
+
+.tree-one {
+  bottom: 25px;
+  left: 40px;
+}
+
+.tree-two {
+  top: 25px;
+  right: 50px;
+}
+
+.tree-three {
+  bottom: 30px;
+  left: 300px;
+}
+
+/* Clouds */
+.map-cloud {
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.65;
+}
+
+.cloud-one {
+  top: 25px;
+  left: 190px;
+}
+
+.cloud-two {
+  top: 70px;
+  right: 120px;
+}
+
+/* Limitation cards */
+.limitations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.limitation-card {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 18px 20px;
+  border-radius: 18px;
+  border-left: 5px solid #19a957;
+  box-shadow: 0 8px 22px rgba(0, 80, 40, 0.08);
+  transition: 0.25s ease;
+}
+
+.limitation-card:hover {
+  transform: translateX(8px);
+  box-shadow: 0 12px 28px rgba(0, 80, 40, 0.13);
+}
+
+.limitation-card span {
+  font-size: 25px;
+  min-width: 35px;
+}
+
+.limitation-card p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+
+/* Mobile */
+@media (max-width: 800px) {
+
+  .limitations-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .eco-map {
+    height: 350px;
+  }
+
+}
+
+/* =====================================================
+   EXTRA BEAUTIFUL ECOROUTE EFFECTS
+   ===================================================== */
+
+/* Smooth page appearance */
+body {
+    overflow-x: hidden;
+}
+
+/* Make sections feel separated */
+section {
+    position: relative;
+}
+
+/* Floating decorative circles */
+.hero::before,
+.hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero::before {
+    width: 250px;
+    height: 250px;
+    background: rgba(52, 180, 105, 0.08);
+    top: 100px;
+    right: -80px;
+}
+
+.hero::after {
+    width: 160px;
+    height: 160px;
+    background: rgba(52, 180, 105, 0.06);
+    bottom: 40px;
+    left: -60px;
+}
+
+/* Better section headings */
+section h2 {
+    position: relative;
+    display: block;
+}
+
+section h2::after {
+    content: "";
+    display: block;
+    width: 55px;
+    height: 4px;
+    background: #18a35c;
+    border-radius: 10px;
+    margin: 12px auto 0;
+}
+
+/* =====================================================
+   BEAUTIFUL FORM
+   ===================================================== */
+
+.planner-form {
+    position: relative;
+    transition: 0.3s ease;
+}
+
+.planner-form:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(20, 90, 50, 0.13);
+}
+
+/* Input icons-style spacing */
+.form-group input::placeholder {
+    color: #9aaa9f;
+}
+
+/* =====================================================
+   FIND ROUTE BUTTON
+   ===================================================== */
+
+.planner-form button[type="submit"] {
+    width: 100%;
+    margin-top: 15px;
+    padding: 16px 25px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #168b50, #21ad67);
+    color: white;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(22, 139, 80, 0.25);
+    transition: all 0.3s ease;
+}
+
+.planner-form button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 13px 28px rgba(22, 139, 80, 0.32);
+}
+
+.planner-form button[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* =====================================================
+   TRANSPORT CARDS
+   ===================================================== */
+
+.transport-option {
+    position: relative;
+    overflow: hidden;
+}
+
+.transport-option::before {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(24, 163, 92, 0.06);
+    right: -20px;
+    top: -20px;
+    transition: 0.3s;
+}
+
+.transport-option:hover::before {
+    transform: scale(1.5);
+}
+
+/* Selected transport option */
+.transport-option:has(input:checked) {
+    border-color: #18a35c;
+    background: #edf9f1;
+    box-shadow: 0 5px 18px rgba(24, 163, 92, 0.12);
+}
+
+/* =====================================================
+   RESULT CARDS — PREMIUM LOOK
+   ===================================================== */
+
+.result-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.result-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #168b50, #65d394);
+}
+
+.result-card h3 {
+    font-size: 17px;
+}
+
+.result-card strong {
+    display: block;
+    margin-top: 8px;
+}
+
+/* =====================================================
+   ECO SCORE
+   ===================================================== */
+
+.eco-score {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    padding: 7px 13px;
+    border-radius: 50px;
+    background: #e7f8ed;
+    color: #168b50;
+    font-weight: 800;
+}
+
+/* =====================================================
+   BEST OPTION — GLOW EFFECT
+   ===================================================== */
+
+.best-option {
+    position: relative;
+    overflow: hidden;
+}
+
+.best-option::after {
+    content: "🌿";
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 45px;
+    opacity: 0.12;
+}
+
+.best-option:hover {
+    box-shadow: 0 15px 40px rgba(30, 120, 65, 0.12);
+}
+
+/* =====================================================
+   TABLE BEAUTIFICATION
+   ===================================================== */
+
+.comparison-table th:first-child {
+    border-radius: 12px 0 0 0;
+}
+
+.comparison-table th:last-child {
+    border-radius: 0 12px 0 0;
+}
+
+.comparison-table tbody tr {
+    transition: 0.2s;
+}
+
+.comparison-table tbody tr:hover {
+    transform: scale(1.005);
+}
+
+/* =====================================================
+   CO2 SAVING BOX
+   ===================================================== */
+
+.co2-saved {
+    position: relative;
+    overflow: hidden;
+}
+
+.co2-saved::before {
+    content: "🌱";
+    position: absolute;
+    font-size: 80px;
+    right: 25px;
+    bottom: -20px;
+    opacity: 0.08;
+}
+
+/* =====================================================
+   ABOUT CARDS
+   ===================================================== */
+
+.about-content {
+    transition: 0.3s ease;
+}
+
+.about-content:hover {
+    transform: translateY(-4px);
+}
+
+/* =====================================================
+   LIMITATIONS CARDS
+   ===================================================== */
+
+.limitations-layout > div {
+    transition: 0.3s ease;
+}
+
+.limitations-layout > div:hover {
+    transform: translateY(-5px);
+    background: #edf9f1;
+    border-color: #c9e6d3;
+    box-shadow: 0 10px 25px rgba(25, 90, 50, 0.08);
+}
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+
+footer {
+    position: relative;
+}
+
+footer::before {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: #55c982;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+}
+
+/* =====================================================
+   SCROLLBAR
+   ===================================================== */
+
+::-webkit-scrollbar {
+    width: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eef6f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #66b889;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #168b50;
+}
+
+/* =====================================================
+   SIMPLE ANIMATION
+   ===================================================== */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content,
+.planner-form,
+.result-card {
+    animation: fadeUp 0.7s ease both;
+}
+
+/* =====================================================
+   MOBILE POLISH
+   ===================================================== */
+
+@media (max-width: 600px) {
+
+    .hero h1 {
+        font-size: 42px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .transport-options {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .result-card {
+        padding: 20px;
+    }
+
+    .best-option::after {
+        font-size: 30px;
+    }
+}
+/* =====================================================
+   BEAUTIFUL HERO VISUAL
+===================================================== */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-bottom: 18px;
+    border-radius: 50px;
+    background: #e5f8ec;
+    color: #168b50;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hero-visual {
+    width: 470px;
+    height: 470px;
+    position: relative;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-image-circle {
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+    overflow: hidden;
+
+    border: 12px solid white;
+
+    box-shadow:
+        0 25px 60px rgba(24, 100, 55, 0.20);
+
+    animation: heroImageFloat 5s ease-in-out infinite;
+}
+
+.hero-image-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* FLOATING STICKERS */
+
+.hero-sticker {
+    position: absolute;
+
+    width: 68px;
+    height: 68px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+    border-radius: 50%;
+
+    font-size: 32px;
+
+    box-shadow:
+        0 12px 30px rgba(20, 70, 40, 0.15);
+
+    animation: stickerFloat 3s ease-in-out infinite;
+}
+
+.hero-leaf {
+    top: 55px;
+    left: 15px;
+}
+
+.hero-earth {
+    top: 20px;
+    right: 30px;
+
+    animation-delay: 0.8s;
+}
+
+.hero-bike {
+    bottom: 45px;
+    right: 15px;
+
+    animation-delay: 1.5s;
+}
+
+
+/* FLOATING INFORMATION CARD */
+
+.hero-floating-card {
+    position: absolute;
+
+    left: 0;
+    bottom: 45px;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    background: rgba(255, 255, 255, 0.96);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 12px 35px rgba(20, 70, 40, 0.15);
+
+    animation: cardFloat 4s ease-in-out infinite;
+}
+
+.hero-floating-card > span {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #e5f8ec;
+    border-radius: 50%;
+
+    font-size: 22px;
+}
+
+.hero-floating-card strong {
+    display: block;
+    color: #173b2a;
+    font-size: 14px;
+}
+
+.hero-floating-card small {
+    display: block;
+    color: #789085;
+    font-size: 11px;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes heroImageFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes stickerFloat {
+
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(6deg);
+    }
+}
+
+@keyframes cardFloat {
+
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 850px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-visual {
+        width: 340px;
+        height: 340px;
+        margin-top: 25px;
+    }
+
+    .hero-image-circle {
+        width: 260px;
+        height: 260px;
+    }
+
+    .hero-floating-card {
+        left: -5px;
+        bottom: 15px;
+    }
+
+    .hero-sticker {
+        width: 55px;
+        height: 55px;
+        font-size: 26px;
+    }
+}
+/* =====================================================
+   BEAUTIFUL ROUTE PLANNER
+===================================================== */
+
+.planner {
+    background:
+        radial-gradient(circle at 10% 20%, rgba(65, 190, 120, 0.08), transparent 25%),
+        #f7fbf8;
+}
+
+.planner .section-header {
+    margin-bottom: 35px;
+}
+
+.planner .section-title {
+    font-size: 42px;
+    color: #123c28;
+}
+
+.planner-form {
+    max-width: 900px;
+    margin: auto;
+    padding: 42px;
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #dceee3;
+    border-radius: 28px;
+    box-shadow: 0 20px 55px rgba(25, 85, 50, 0.10);
+}
+
+/* INPUT GROUPS */
+
+.planner-form .form-group {
+    margin-bottom: 25px;
+}
+
+.planner-form label {
+    color: #214c35;
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 9px;
+}
+
+.planner-form input[type="text"] {
+    height: 54px;
+    padding: 0 18px;
+
+    border: 1.5px solid #d3e6da;
+    border-radius: 14px;
+
+    background: #fbfefc;
+    color: #173b2a;
+
+    font-size: 16px;
+
+    transition: all 0.25s ease;
+}
+
+.planner-form input[type="text"]:hover {
+    border-color: #9bc9ac;
+}
+
+.planner-form input[type="text"]:focus {
+    border-color: #18a35c;
+    background: white;
+    outline: none;
+
+    box-shadow:
+        0 0 0 4px rgba(24, 163, 92, 0.10);
+}
+
+/* TRANSPORT FIELDSET */
+
+.transport-fieldset {
+    border: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.transport-fieldset legend {
+    font-size: 17px;
+    font-weight: 800;
+    color: #214c35;
+    margin-bottom: 15px;
+}
+
+/* TRANSPORT OPTIONS */
+
+.transport-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+
+.transport-option {
+    min-height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    padding: 15px;
+
+    background: #f8fcf9;
+    border: 1.5px solid #dcece2;
+    border-radius: 17px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+    color: #315344;
+
+    transition: all 0.25s ease;
+}
+
+.transport-option:hover {
+    transform: translateY(-4px);
+    background: #effaf3;
+    border-color: #82c59a;
+    box-shadow: 0 8px 20px rgba(25, 100, 55, 0.10);
+}
+
+/* CHECKBOX */
+
+.transport-option input {
+    width: 18px;
+    height: 18px;
+    accent-color: #168b50;
+    cursor: pointer;
+}
+
+/* SELECTED TRANSPORT */
+
+.transport-option:has(input:checked) {
+    background: #eaf8ef;
+    border-color: #35a867;
+    color: #168b50;
+
+    box-shadow:
+        0 6px 18px rgba(24, 163, 92, 0.12);
+}
+
+/* ERROR MESSAGE */
+
+.form-error {
+    color: #c0392b;
+    background: #fff4f2;
+    border-radius: 10px;
+    padding: 0;
+    margin-top: 10px;
+}
+
+/* FIND ROUTE BUTTON */
+
+#find-route-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 17px;
+
+    border: none;
+    border-radius: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #168b50,
+        #27b96b
+    );
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 25px rgba(22, 139, 80, 0.25);
+
+    transition: all 0.3s ease;
+}
+
+#find-route-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 32px rgba(22, 139, 80, 0.32);
+}
+
+#find-route-btn:active {
+    transform: translateY(0);
+}
+
+/* SMALL DECORATIVE LINE */
+
+.planner-form::before {
+    content: "🌿  Choose your journey";
+    display: block;
+
+    color: #168b50;
+    font-size: 13px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+    margin-bottom: 25px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .planner-form {
+        padding: 25px 20px;
+        border-radius: 22px;
+    }
+
+    .planner .section-title {
+        font-size: 34px;
+    }
+
+    .transport-options {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 450px) {
+
+    .transport-options {
+        grid-template-columns: 1fr;
+    }
+
+    .planner-form {
+        padding: 22px 16px;
+    }
+}
+/* =====================================================
+   BEAUTIFUL RESULTS SECTION - VERSION 2
+   ===================================================== */
+
+.results {
+    position: relative;
+    padding: 90px 7%;
+    background: linear-gradient(135deg, #f7fcf8 0%, #eef8f1 100%);
+    overflow: hidden;
+}
+
+/* Decorative background circles */
+.results::before {
+    content: "";
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    background: rgba(65, 170, 100, 0.08);
+    top: -100px;
+    right: -80px;
+}
+
+.results::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(65, 170, 100, 0.06);
+    bottom: -70px;
+    left: -60px;
+}
+
+/* Keep content above decorations */
+.results > * {
+    position: relative;
+    z-index: 2;
+}
+
+
+/* -------------------------------
+   SECTION HEADING
+-------------------------------- */
+
+.results .section-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.results .section-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: #173b29;
+    margin-bottom: 12px;
+}
+
+.results .section-subtitle {
+    color: #607568;
+    font-size: 16px;
+}
+
+
+/* -------------------------------
+   PLACEHOLDER
+-------------------------------- */
+
+.results-placeholder {
+    max-width: 650px;
+    margin: 0 auto 35px;
+    padding: 22px 28px;
+    text-align: center;
+    background: white;
+    border-radius: 18px;
+    color: #6a7d70;
+    box-shadow: 0 8px 30px rgba(30, 80, 45, 0.07);
+}
+
+
+/* -------------------------------
+   RESULT CARDS
+-------------------------------- */
+
+.results-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 22px;
+    max-width: 1150px;
+    margin: 0 auto 35px;
+}
+
+.result-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #dceee2;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 12px 35px rgba(25, 80, 45, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.result-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 45px rgba(25, 80, 45, 0.14);
+}
+
+.result-card::after {
+    content: "🌿";
+    position: absolute;
+    right: 15px;
+    top: 12px;
+    font-size: 25px;
+    opacity: 0.15;
+}
+
+.result-card h3 {
+    color: #173b29;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.result-card p {
+    color: #68796e;
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.result-card strong {
+    color: #247442;
+    font-size: 18px;
+}
+
+
+/* -------------------------------
+   BEST OPTION
+-------------------------------- */
+
+.best-option {
+    max-width: 850px;
+    margin: 30px auto 45px;
+    padding: 30px 35px;
+    background: linear-gradient(135deg, #1f7a42, #3da85f);
+    border-radius: 26px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 18px 40px rgba(31, 122, 66, 0.20);
+    overflow: hidden;
+}
+
+.best-option h3 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.best-option p {
+    margin: 6px 0;
+    opacity: 0.95;
+}
+
+.best-option::before {
+    content: "🌱";
+    position: absolute;
+    font-size: 90px;
+    opacity: 0.10;
+    left: 20px;
+    bottom: -20px;
+}
+
+.best-option::after {
+    content: "🌿";
+    position: absolute;
+    font-size: 80px;
+    opacity: 0.10;
+    right: 25px;
+    top: -20px;
+}
+
+
+/* -------------------------------
+   COMPARISON TABLE
+-------------------------------- */
+
+.table-wrapper {
+    max-width: 1150px;
+    margin: 0 auto 45px;
+    overflow-x: auto;
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 12px 35px rgba(25, 80, 45, 0.08);
+    border: 1px solid #dceee2;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+.comparison-table caption {
+    padding: 25px 20px;
+    font-size: 22px;
+    font-weight: 750;
+    color: #173b29;
+    text-align: left;
+}
+
+.comparison-table th {
+    background: #edf8f0;
+    color: #245b38;
+    padding: 17px 15px;
+    text-align: left;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.comparison-table td {
+    padding: 17px 15px;
+    border-bottom: 1px solid #edf2ee;
+    color: #596960;
+    font-size: 14px;
+}
+
+.comparison-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.comparison-table tbody tr:hover {
+    background: #f5fbf6;
+}
+
+.comparison-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* -------------------------------
+   CO2 CHART
+-------------------------------- */
+
+.chart-section {
+    max-width: 1000px;
+    margin: 0 auto 40px;
+    padding: 35px;
+    background: white;
+    border-radius: 25px;
+    border: 1px solid #dceee2;
+    box-shadow: 0 12px 35px rgba(25, 80, 45, 0.07);
+}
+
+.chart-title {
+    text-align: center;
+    font-size: 24px;
+    color: #173b29;
+    margin-bottom: 30px;
+}
+
+.chart-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+
+/* -------------------------------
+   ECO SCORE NOTE
+-------------------------------- */
+
+.note {
+    max-width: 900px;
+    margin: 30px auto 0;
+    padding: 18px 22px;
+    background: #fffdf1;
+    border-left: 5px solid #d6b94c;
+    border-radius: 12px;
+    color: #756b3c;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* -------------------------------
+   MOBILE
+-------------------------------- */
+
+@media (max-width: 768px) {
+
+    .results {
+        padding: 65px 5%;
+    }
+
+    .results .section-title {
+        font-size: 32px;
+    }
+
+    .results-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .best-option {
+        padding: 25px 20px;
+    }
+
+    .chart-section {
+        padding: 25px 18px;
+    }
+
+    .comparison-table caption {
+        font-size: 19px;
+    }
+}

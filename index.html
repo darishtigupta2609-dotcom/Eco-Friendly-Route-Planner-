@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoRoute compares travel options using distance, estimated fuel consumption and carbon emissions.">
+  <title>EcoRoute | Eco-Friendly Route Planner</title>
+
+  <!-- Connect your CSS file -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ============ 1. NAVIGATION BAR ============ -->
+  <header class="site-header" id="top">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#home" class="navbar-logo" id="nav-logo">EcoRoute</a>
+
+      <ul class="navbar-links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#route-planner">Route Planner</a></li>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#environmental-impact">Environmental Impact</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#limitations">Limitations</a></li>
+        <li><a href="#future-scope">Future Scope</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ 2. HOME / HERO SECTION ============ -->
+    
+    <section class="hero" id="home">
+
+  <div class="hero-content">
+
+    <p class="hero-badge">🌿 ECO-FRIENDLY TRAVEL</p>
+
+    <h1 class="hero-title">
+      EcoRoute
+    </h1>
+
+    <p class="hero-tagline">
+      Plan Smarter. Travel Greener.
+    </p>
+
+    <p class="hero-description">
+      Compare routes based on distance, fuel consumption and carbon emissions.
+      EcoRoute helps you understand the environmental impact of your
+      transportation choices, so you can pick the greener option.
+    </p>
+
+    <a href="#route-planner"
+       class="btn btn-primary"
+       id="plan-route-btn">
+       🌱 Plan My Route
+    </a>
+
+  </div>
+
+
+  <!-- BEAUTIFUL HERO VISUAL -->
+
+  <div class="hero-visual">
+
+    <div class="hero-image-circle">
+      <img
+        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80"
+        alt="Beautiful green landscape">
+    </div>
+
+    <div class="hero-sticker hero-leaf">
+      🌿
+    </div>
+
+    <div class="hero-sticker hero-earth">
+      🌍
+    </div>
+
+    <div class="hero-sticker hero-bike">
+      🚲
+    </div>
+
+    <div class="hero-floating-card">
+      <span>🌱</span>
+      <div>
+        <strong>Travel Greener</strong>
+        <small>Make every journey count</small>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- ============ 3. ROUTE PLANNER SECTION ============ -->
+    <section class="planner" id="route-planner">
+      <div class="section-header">
+        <h2 class="section-title">Route Planner</h2>
+        <p class="section-subtitle">
+          Enter where you are starting and where you want to go, then choose the transport modes to compare.
+        </p>
+      </div>
+
+      <form class="planner-form" id="route-form" novalidate>
+
+        <!-- Starting location -->
+        <div class="form-group">
+          <label for="start-location">Starting Location</label>
+          <input
+            type="text"
+            id="start-location"
+            name="start-location"
+            list="location-list"
+            placeholder="e.g. Chandigarh"
+            autocomplete="off"
+            required>
+        </div>
+
+        <!-- Destination -->
+        <div class="form-group">
+          <label for="destination">Destination</label>
+          <input
+            type="text"
+            id="destination"
+            name="destination"
+            list="location-list"
+            placeholder="e.g. Shimla"
+            autocomplete="off"
+            required>
+        </div>
+
+        <!-- Suggestions list: JavaScript can fill this later with your sample locations -->
+        <datalist id="location-list"></datalist>
+
+        <!-- Transport mode selection -->
+        <fieldset class="form-group transport-fieldset" id="transport-modes">
+          <legend>Transport Modes to Compare</legend>
+
+          <div class="transport-options">
+            <label class="transport-option" for="mode-car">
+              <input type="checkbox" id="mode-car" name="transport-mode" value="car" checked>
+              <span class="transport-name">Car</span>
+            </label>
+
+            <label class="transport-option" for="mode-bus">
+              <input type="checkbox" id="mode-bus" name="transport-mode" value="bus" checked>
+              <span class="transport-name">Bus</span>
+            </label>
+
+            <label class="transport-option" for="mode-bicycle">
+              <input type="checkbox" id="mode-bicycle" name="transport-mode" value="bicycle" checked>
+              <span class="transport-name">Bicycle</span>
+            </label>
+
+            <label class="transport-option" for="mode-walking">
+              <input type="checkbox" id="mode-walking" name="transport-mode" value="walking" checked>
+              <span class="transport-name">Walking</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Error message area: JavaScript will show messages here -->
+        <p class="form-error" id="form-error" role="alert" aria-live="polite"></p>
+
+        <!-- Find Route button -->
+        <button type="submit" class="btn btn-primary" id="find-route-btn">Find Route</button>
+      </form>
+    </section>
+
+    <!-- ============ 4. RESULTS SECTION ============ -->
+    <section class="results" id="results" aria-live="polite">
+      <div class="section-header">
+        <h2 class="section-title">Results</h2>
+        <p class="section-subtitle" id="route-summary">
+          Your route comparison will appear here after you click "Find Route".
+        </p>
+      </div>
+
+      <!-- Shown before any search is made -->
+      <p class="results-placeholder" id="results-placeholder">
+        No results yet. Enter a starting location and destination above to begin.
+      </p>
+
+      <!-- Result cards: JavaScript will add one card per transport mode -->
+      <div class="results-cards" id="results-cards"></div>
+
+      <!-- Best (lowest-emission) option: JavaScript will fill this in -->
+      <div class="best-option" id="best-option"></div>
+
+      <!-- Comparison table -->
+      <div class="table-wrapper">
+        <table class="comparison-table" id="comparison-table">
+          <caption>Comparison of transport modes</caption>
+          <thead>
+            <tr>
+              <th scope="col">Transport Mode</th>
+              <th scope="col">Distance (km)</th>
+              <th scope="col">Travel Time</th>
+              <th scope="col">Fuel Used (L)</th>
+              <th scope="col">CO₂ Emissions (kg)</th>
+              <th scope="col">Eco Score</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-table-body">
+            <!-- JavaScript will add table rows here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- CO2 comparison chart (simple horizontal bars, built later with CSS + JS) -->
+      <div class="chart-section" id="co2-chart-section">
+        <h3 class="chart-title">CO₂ Emissions Comparison</h3>
+        <div class="chart-bars" id="co2-chart">
+          <!-- JavaScript will add one bar per transport mode here -->
+        </div>
+      </div>
+
+      <p class="note" id="eco-score-note">
+        Note: The Eco Score is a project-created metric based on this project's emission
+        assumptions. It is not an official environmental rating.
+      </p>
+    </section>
+
+    <!-- ============ 5. ENVIRONMENTAL IMPACT SECTION ============ -->
+    <section class="impact" id="environmental-impact">
+      <div class="section-header">
+        <h2 class="section-title">Environmental Impact</h2>
+        <p class="section-subtitle">
+          The way we travel affects the air we breathe and the climate we live in.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="info-card" id="card-carbon-footprint">
+          <h3>Carbon Footprint</h3>
+          <p>
+            A carbon footprint is the total amount of greenhouse gases, such as carbon dioxide (CO₂),
+            released by an activity. Burning petrol or diesel in vehicles is a major source of
+            transportation-related CO₂.
+          </p>
+        </article>
+
+        <article class="info-card" id="card-air-pollution">
+          <h3>Air Pollution</h3>
+          <p>
+            Vehicle exhaust can add harmful pollutants to the air, especially in busy cities.
+            Choosing cleaner ways to travel can help improve local air quality.
+          </p>
+        </article>
+
+        <article class="info-card" id="card-fuel-consumption">
+          <h3>Fuel Consumption</h3>
+          <p>
+            The more fuel a vehicle burns, the more CO₂ it produces. Shorter trips, shared rides
+            and public transport can reduce the fuel used per person.
+          </p>
+        </article>
+
+        <article class="info-card" id="card-sustainable-transport">
+          <h3>Sustainable Transportation</h3>
+          <p>
+            Walking, cycling, public transport, carpooling and electric vehicles are all ways to
+            lower the environmental cost of getting from one place to another.
+          </p>
+        </article>
+      </div>
+
+      <!-- Estimated CO2 saved: JavaScript will fill this in after a route is calculated -->
+      <div class="co2-saved" id="co2-saved">
+        <h3>Estimated CO₂ Saved</h3>
+        <p id="co2-saved-text">
+          Find a route to see how much CO₂ you could save by choosing the lower-emission option.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 6. ABOUT PROJECT SECTION ============ -->
+    <section class="about" id="about">
+      <div class="section-header">
+        <h2 class="section-title">About the Project</h2>
+      </div>
+
+      <div class="about-grid">
+        <article class="about-block" id="about-problem">
+          <h3>Problem</h3>
+          <p>
+            Many people choose how to travel without knowing how much fuel they use or how much
+            carbon dioxide their trip produces.
+          </p>
+        </article>
+
+        <article class="about-block" id="about-solution">
+          <h3>Solution</h3>
+          <p>
+            EcoRoute is a web-based prototype that compares travel options using distance,
+            estimated fuel consumption and estimated carbon emissions, and highlights the
+            lower-emission choice.
+          </p>
+        </article>
+
+        <article class="about-block" id="about-technology">
+          <h3>Technology Used</h3>
+          <ul>
+            <li>HTML: page structure</li>
+            <li>CSS: design, layout and responsive appearance</li>
+            <li>JavaScript: calculations, comparisons and dynamic results</li>
+          </ul>
+        </article>
+
+        <article class="about-block" id="about-assumptions">
+          <h3>Assumptions</h3>
+          <ul>
+            <li>Distances come from a small set of sample routes stored in the project.</li>
+            <li>Fuel used = Distance ÷ Vehicle mileage.</li>
+            <li>CO₂ = Fuel used × selected emission factor.</li>
+            <li>Bus emissions use an estimated CO₂-per-passenger-kilometre value.</li>
+            <li>Bicycle and walking produce no CO₂ during travel.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 7. LIMITATIONS SECTION ============ -->
+    
+    <section class="limitations" id="limitations">
+
+  <div class="section-header">
+    <h2 class="section-title">Limitations</h2>
+    <p class="section-subtitle">
+      A few things to keep in mind while using EcoRoute.
+    </p>
+  </div>
+
+  <div class="limitations-layout">
+
+    <!-- Map-style illustration -->
+    <div class="eco-map">
+
+      <div class="map-road road-one"></div>
+      <div class="map-road road-two"></div>
+      <div class="map-road road-three"></div>
+
+      <div class="map-route-line"></div>
+
+      <div class="map-pin start-pin">📍</div>
+      <div class="map-pin end-pin">📍</div>
+
+      <div class="map-car">🚗</div>
+
+      <div class="map-label start-label">
+        Starting Point
+      </div>
+
+      <div class="map-label end-label">
+        Destination
+      </div>
+
+      <div class="map-tree tree-one">🌳</div>
+      <div class="map-tree tree-two">🌲</div>
+      <div class="map-tree tree-three">🌳</div>
+
+      <div class="map-cloud cloud-one">☁️</div>
+      <div class="map-cloud cloud-two">☁️</div>
+
+    </div>
+
+
+    <!-- Limitation cards -->
+    <div class="limitations-list">
+
+      <div class="limitation-card">
+        <span>🗺️</span>
+        <p>Version 1 uses sample locations and predefined distances instead of live map data.</p>
+      </div>
+
+      <div class="limitation-card">
+        <span>⛽</span>
+        <p>Fuel and emission values are estimates based on general assumptions.</p>
+      </div>
+
+      <div class="limitation-card">
+        <span>🚦</span>
+        <p>Traffic, road conditions, weather and vehicle type are not considered.</p>
+      </div>
+
+      <div class="limitation-card">
+        <span>⏱️</span>
+        <p>Travel times are approximate.</p>
+      </div>
+
+      <div class="limitation-card">
+        <span>🌱</span>
+        <p>The Eco Score is a project-created metric, not an official rating.</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+    <!-- ============ 8. FUTURE SCOPE SECTION ============ -->
+    <section class="future" id="future-scope">
+      <div class="section-header">
+        <h2 class="section-title">Future Scope</h2>
+      </div>
+
+      <ul class="future-list" id="future-list">
+        <li>Interactive map with real route distances</li>
+        <li>Live location search</li>
+        <li>Real routing data from a map service</li>
+        <li>Weather consideration</li>
+        <li>Electric vehicle (EV) charging information</li>
+        <li>Carpooling and public-transport data</li>
+        <li>More detailed CO₂ graphs and an environmental-impact dashboard</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <!-- ============ 9. FOOTER ============ -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-content">
+      <p class="footer-title">EcoRoute: Eco-Friendly Route Planner</p>
+      <p class="footer-text">Environmental Studies Project | Prototype Version 1</p>
+      <p class="footer-text">Built with HTML, CSS and JavaScript.</p>
+      <a href="#top" class="footer-back-to-top" id="back-to-top">Back to top</a>
+      <p class="footer-copy">&copy; 2026 EcoRoute. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Connect your JavaScript file (placed at the end so the page loads first) -->
+  <script src="script.js"></script>
+</body>
+</html>
